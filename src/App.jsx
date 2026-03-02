@@ -197,7 +197,6 @@ const speedMs = 1500; // fixed reveal speed
         <div className="card cardTall oddsCard">
           <div className="cardHead">
             <div className="cardTitle">Odds Table</div>
-            <div className="muted">Deterministic odds • Sim changes results only</div>
           </div>
 
           {/* KEY CHANGE: odds body scrolls too, so both cards stay same height */}
