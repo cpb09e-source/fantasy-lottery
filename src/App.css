@@ -1,0 +1,338 @@
+@import url("https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,400;8..144,600;8..144,700;8..144,800;8..144,900&display=swap");
+
+:root {
+  --bg: #f6f7fb;
+  --card: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --shadow: 0 10px 25px rgba(17, 24, 39, 0.06);
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Google Sans Flex", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.page {
+  max-width: 1250px;
+  margin: 22px auto;
+  padding: 0 16px 30px;
+}
+
+.top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.kicker {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.controls {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.select {
+  height: 38px;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: #111827;
+  border-radius: 10px;
+  padding: 0 10px;
+  font-weight: 900;
+  outline: none;
+}
+
+.select:focus {
+  border-color: #111827;
+  box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.15);
+}
+
+.btn {
+  height: 38px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: white;
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.btn:hover { background: #f9fafb; }
+
+.btn.primary {
+  border-color: #111827;
+  background: #111827;
+  color: white;
+}
+
+.btn.primary:hover { background: #0b1220; }
+
+.toggle {
+  height: 38px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: white;
+  cursor: pointer;
+  font-weight: 900;
+  color: #111827;
+}
+
+.toggle:hover { background: #f9fafb; }
+
+.toggle.disabled,
+.toggle:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* --- LAYOUT --- */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 14px;
+  align-items: stretch; /* cards same height */
+}
+
+@media (max-width: 1100px) {
+  .layout { grid-template-columns: 1fr; }
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 0;
+}
+
+/* --- CARD --- */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  min-height: 0;
+}
+
+.cardTall {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.cardHead {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.cardTitle { font-weight: 1000; }
+
+.muted {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.cardBodyGrow {
+  flex: 1;
+  min-height: 0;
+}
+
+/* BOTH sides scroll internally so heights always match */
+.resultScroll,
+.oddsScroll {
+  overflow: auto;
+}
+
+.empty {
+  padding: 12px 14px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* --- TABLE --- */
+.tableWrap { overflow: hidden; }
+.tableWrap.noScroll { overflow: hidden; }
+
+.tbl.fit {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.tbl thead th {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 10px 8px;
+  font-size: 12px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.tbl tbody td {
+  border-bottom: 1px solid #f1f5f9;
+  padding: 10px 8px;
+  font-size: 12px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.tbl tbody tr:last-child td { border-bottom: none; }
+
+.colTeam {
+  width: 340px;
+  text-align: left !important;
+  background: white;
+}
+
+.colPick {
+  width: calc((100% - 340px) / 10);
+}
+
+.teamPill {
+  display: inline-block;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: white;
+  padding: 6px 10px;
+  font-weight: 900;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cell {
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.cell:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(17,24,39,0.08);
+}
+
+/* --- RESULT --- */
+.resultButtons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.resultList.revealBack {
+  margin: 0;
+  padding: 12px 14px 14px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.resultRow {
+  display: grid;
+  grid-template-columns: 58px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 10px;
+  border-radius: 12px;
+}
+
+.finalPickAll {
+  border: 1px solid rgba(17, 24, 39, 0.35);
+  background: linear-gradient(180deg, rgba(17,24,39,0.04), rgba(17,24,39,0.02));
+}
+
+.pickTag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  height: 30px;
+  font-weight: 1000;
+  font-size: 12px;
+}
+
+.pickTagFinal {
+  border: 1px solid rgba(17, 24, 39, 0.35);
+  background: #111827;
+  color: white;
+}
+
+.resultName { font-weight: 1000; }
+
+/* Parentheses styling in Results */
+.parenText {
+  font-style: italic;
+  font-size: calc(100% - 3px);
+  font-weight: 700;
+  color: rgba(17, 24, 39, 0.85);
+}
+
+/* Delta badge */
+.delta {
+  font-size: 12px;
+  font-weight: 1000;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(17, 24, 39, 0.18);
+  background: rgba(17, 24, 39, 0.04);
+  min-width: 54px;
+  text-align: center;
+}
+
+.delta.plus {
+  border-color: rgba(16, 185, 129, 0.45);
+  background: rgba(16, 185, 129, 0.18);
+  color: #065f46;
+}
+
+.delta.minus {
+  border-color: rgba(239, 68, 68, 0.45);
+  background: rgba(239, 68, 68, 0.18);
+  color: #7f1d1d;
+}
+
+.delta.even {
+  border-color: rgba(107, 114, 128, 0.45);
+  background: rgba(107, 114, 128, 0.14);
+  color: #374151;
+}
