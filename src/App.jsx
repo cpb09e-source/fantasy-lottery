@@ -96,7 +96,7 @@ export default function App() {
   // Projected pick = odds-table row order
   const projectedPickByTeam = useMemo(() => LOTTERY_TEAMS.map((_, i) => i + 1), []);
 
-  const [speedMs, setSpeedMs] = useState(1500);
+const speedMs = 1500; // fixed reveal speed
 
   const [order, setOrder] = useState(null);
   const [revealFromBackCount, setRevealFromBackCount] = useState(0);
@@ -104,20 +104,7 @@ export default function App() {
 
   const timerRef = useRef(null);
 
-  useEffect(() => {
-    try {
-      const saved = JSON.parse(localStorage.getItem(LS_KEY) || "null");
-      if (saved && typeof saved.speedMs === "number") setSpeedMs(saved.speedMs);
-    } catch {
-      // ignore
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem(LS_KEY, JSON.stringify({ speedMs }));
-  }, [speedMs]);
-
-  function clearTimer() {
+ function clearTimer() {
     if (timerRef.current) {
       clearInterval(timerRef.current);
       timerRef.current = null;
@@ -199,18 +186,6 @@ export default function App() {
         </div>
 
         <div className="controls">
-          <div className="control">
-            <label className="label">Speed</label>
-            <select
-              className="select"
-              value={speedMs}
-              onChange={(e) => setSpeedMs(Number(e.target.value))}
-            >
-              <option value={1500}>Normal</option>
-              <option value={2200}>Slow</option>
-            </select>
-          </div>
-
           <button className="btn primary" onClick={onSimLottery}>
             Sim Lottery
           </button>
