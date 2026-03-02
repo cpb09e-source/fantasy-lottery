@@ -336,3 +336,141 @@ body {
   background: rgba(107, 114, 128, 0.14);
   color: #374151;
 }
+
+/* =========================
+   Mobile responsiveness
+   ========================= */
+
+/* Make controls wrap cleanly */
+.controls {
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+@media (max-width: 900px) {
+  .page {
+    padding: 0 12px 24px;
+  }
+
+  /* Stack cards */
+  .layout {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  /* Put Result first on mobile */
+  .side {
+    order: -1;
+  }
+
+  /* Make cards feel less bulky */
+  .cardHead {
+    padding: 10px 12px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .controls {
+    justify-content: flex-start;
+  }
+
+  /* Let both cards size naturally on mobile (avoid awkward equal-height stretching) */
+  .cardTall {
+    min-height: auto;
+  }
+
+  .resultScroll,
+  .oddsScroll {
+    overflow: visible;
+  }
+
+  /* Result list tighter */
+  .resultList.revealBack {
+    padding: 10px 12px 12px;
+    gap: 8px;
+  }
+
+  .resultRow {
+    padding: 8px 8px;
+    grid-template-columns: 54px 1fr auto;
+    gap: 8px;
+  }
+
+  .pickTag {
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .delta {
+    min-width: 50px;
+    padding: 6px 8px;
+  }
+
+  /* Pills tighter */
+  .teamPill {
+    padding: 6px 9px;
+    font-size: 13px;
+  }
+
+  .parenText {
+    /* keep it 3px smaller than surrounding text */
+    font-size: calc(100% - 3px);
+  }
+
+  /* Odds table: allow horizontal scrolling on mobile */
+  .tableWrap {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Keep header visible while scrolling the table horizontally */
+  .tbl thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+
+  /* Make the table wide enough to be readable */
+  .tbl.fit {
+    table-layout: auto;     /* allow natural column widths on small screens */
+    min-width: 780px;       /* forces horizontal scroll instead of squishing */
+  }
+
+  /* Slightly smaller table text */
+  .tbl thead th,
+  .tbl tbody td {
+    font-size: 11px;
+    padding: 8px 6px;
+  }
+
+  /* Team column doesn’t need to be so wide on mobile */
+  .colTeam {
+    width: 240px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 18px;
+  }
+
+  .btn,
+  .toggle,
+  .select {
+    height: 36px;
+  }
+
+  .teamPill {
+    font-size: 12px;
+  }
+
+  .resultName {
+    font-size: 14px;
+  }
+
+  .tbl.fit {
+    min-width: 740px;
+  }
+}
