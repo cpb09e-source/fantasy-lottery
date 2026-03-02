@@ -474,3 +474,9 @@ body {
     min-width: 740px;
   }
 }
+
+/* Force button label to never wrap (Sim Lottery stays on one line) */
+.btn.primary {
+  white-space: nowrap !important;
+  line-height: 1 !important;
+}
